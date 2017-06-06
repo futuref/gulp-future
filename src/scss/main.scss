@@ -1,0 +1,19 @@
+$mainbg: #d5f5f5;
+$mainbordercolor:#ccc;
+$maincolor:#fff;
+
+body {
+  background-color: $mainbg;
+  color: $maincolor;
+  height: 100%;
+  padding: 3px;
+  position: relative;
+  width: 100%;
+}
+
+h1 {
+  color: $maincolor;
+  font-size: 24px;
+  font-style: italic;
+  margin: 20px auto;
+}
