@@ -16,5 +16,24 @@
   "bugs": {
     "url": "https://github.com/futuref/gulp-future/issues"
   },
-  "homepage": "https://github.com/futuref/gulp-future#readme"
+  "homepage": "https://github.com/futuref/gulp-future#readme",
+  "devDependencies": {
+    "autoprefixer": "^7.1.1",
+    "browser-sync": "^2.18.12",
+    "cssnano": "^3.10.0",
+    "eslint": "^3.19.0",
+    "eslint-config-google": "^0.8.0",
+    "gulp": "^3.9.1",
+    "gulp-cached": "^1.1.1",
+    "gulp-eslint": "^3.0.1",
+    "gulp-eslint-if-fixed": "^1.0.0",
+    "gulp-if": "^2.0.2",
+    "gulp-load-plugins": "^1.5.0",
+    "gulp-notify": "^3.0.0",
+    "gulp-plumber": "^1.1.0",
+    "gulp-postcss": "^7.0.0",
+    "gulp-sass": "^3.1.0",
+    "gulp-scss-lint": "^0.4.0",
+    "run-sequence": "^1.2.2"
+  }
 }
