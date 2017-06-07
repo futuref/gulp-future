@@ -7,10 +7,11 @@ var gulp = require('gulp'),
     gulpLoadPlugins = require('gulp-load-plugins'),
     plugins = gulpLoadPlugins();
 
-function isFixed(file) {
-  return file.eslint != null && file.eslint.fixed;
-}
+// function isFixed(file) {
+//   return file.eslint != null && file.eslint.fixed;
+// }
 
+// development
 //自动刷新
 gulp.task('browserSync',function(){
   browserSync({
@@ -33,7 +34,7 @@ gulp.task('js-lint',function() {
         .pipe(plugins.cached(config.path.srclintScript))
         .pipe(plugins.eslint({fix:true}))
         .pipe(plugins.eslint.format())
-        .pipe(plugins.if(isFixed, gulp.dest(config.path.distScript)))
+        // .pipe(plugins.if(isFixed, gulp.dest(config.path.distScript)))
 })
 
 // 检查 scss
@@ -54,7 +55,6 @@ gulp.task('css',function() {
          .pipe(plugins.plumber())
          .pipe(plugins.postcss(processors))
          .pipe(gulp.dest(config.path.srcCss))
-         .pipe(gulp.dest(config.path.distCss))
          .pipe(plugins.notify('scss编译完成'))
 })
 
@@ -68,4 +68,36 @@ gulp.task('watch',function() {
 // 默认开发任务
 gulp.task('default',function(callback){
   runSequence(['js-lint','scss-lint','css','browserSync','watch'],callback);
+})
+
+// production
+
+// copy css
+gulp.task('copy:css',function() {
+  return gulp.src(config.path.copyCss)
+         .pipe(gulp.dest(config.path.distCss))
+         .pipe(plugins.size())
+})
+
+//optimize js
+gulp.task('optimize:js',function() {
+  return gulp.src(config.path.srcScript)
+         .pipe(plugins.uglify())
+         .pipe(gulp.dest(config.path.distScript))
+         .pipe(plugins.size())
+})
+
+// optimize html
+gulp.task('optimize:html',function() {
+  return gulp.src(config.path.srcHtml)
+        .pipe(plugins.htmlmin(config.optimize.htmloptions))
+        .pipe(gulp.dest(config.path.distHtml))
+})
+
+// optimize images
+gulp.task('optimize:images',function() {
+  return gulp.src(config.path.srcImages)
+         .pipe(plugins.imagemin(config.optimize.imageoptions))
+         .pipe(gulp.dest(config.path.distImages))
+         .pipe(plugins.size())
 })

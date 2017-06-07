@@ -2,18 +2,22 @@
   "path":{
     "root":"./",
     "src": "src/",
-    "srcImages":"src/images/",
+    "srcImages":"src/images/**/*.{png,jpg,gif,jpeg}",
     "srcCss":"src/css/",
+    "copyCss":"src/css/*.css",
     "srcHtml":"src/*.html",
-    "srcScript":"src/script/",
+    "srcScript":"src/script/**/*.js",
     "srclintScript":"src/script/*.js",
+    "srcOptimizeScript":"src/script/*.js",
     "srcexcludeScript":"src/script/vendor/**/*.js",
     "srcComplieScss":"src/scss/main.scss",
     "srclintScss":"src/scss/*.scss",
     "srcExcludeScss":"src/scss/vendor/**/*.scss",
     "dist": "dist/",
     "distScript":"dist/script/",
-    "distCss":"dist/css/"
+    "distCss":"dist/css/",
+    "distHtml":"dist/html/",
+    "distImages":"dist/images/"
   },
   "autoprefixer":{
     "browsers": [
@@ -25,5 +29,15 @@
           "android 4.4"
         ],
         "cascade": true
+  },
+  "optimize":{
+    "imageoptions":{
+      "optimizationLevel":3,
+      "progessive":true,
+      "interlaced":true
+    },
+    "htmloptions":{
+      "collapseWhitespace":true
+    }
   }
 }
