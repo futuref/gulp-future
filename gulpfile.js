@@ -4,6 +4,7 @@ var gulp = require('gulp'),
     cssnano = require('cssnano'),
     browserSync = require('browser-sync'),
     runSequence = require('run-sequence'),
+    del         = require('del'),
     gulpLoadPlugins = require('gulp-load-plugins'),
     plugins = gulpLoadPlugins();
 
@@ -12,7 +13,7 @@ var gulp = require('gulp'),
 // }
 
 // development
-//自动刷新
+//browserSync
 gulp.task('browserSync',function(){
   browserSync({
     server:{
@@ -28,7 +29,7 @@ gulp.task('browserSync',function(){
   })
 })
 
-// 检查js
+// eslint-js
 gulp.task('js-lint',function() {
   return gulp.src(config.path.srclintScript)
         .pipe(plugins.cached(config.path.srclintScript))
@@ -37,14 +38,14 @@ gulp.task('js-lint',function() {
         // .pipe(plugins.if(isFixed, gulp.dest(config.path.distScript)))
 })
 
-// 检查 scss
+// eslint scss
 gulp.task('scss-lint',function() {
   return gulp.src([config.path.srclintScss,'!' + config.path.srcExcludeScss])
          .pipe(plugins.cached(config.path.srclintScss))
          .pipe(plugins.scssLint())
 })
 
-// 编译scss
+// complie scss
 gulp.task('css',function() {
   var processors = [
     autoprefixer(config.autoprefixer),
@@ -58,24 +59,27 @@ gulp.task('css',function() {
          .pipe(plugins.notify('scss编译完成'))
 })
 
-// 监听任务
+// watch
 gulp.task('watch',function() {
   gulp.watch(config.path.srclintScss,['css','scss-lint']);
   gulp.watch(config.path.srclintScript,['js-lint']);
   gulp.watch(config.path.srcHtml);
 })
 
-// 默认开发任务
+// default
 gulp.task('default',function(callback){
   runSequence(['js-lint','scss-lint','css','browserSync','watch'],callback);
 })
 
-// production
 
+// production
 // copy css
 gulp.task('copy:css',function() {
   return gulp.src(config.path.copyCss)
+         .pipe(plugins.rev())
          .pipe(gulp.dest(config.path.distCss))
+         .pipe(plugins.rev.manifest())
+         .pipe(gulp.dest('.rev/css'))
          .pipe(plugins.size())
 })
 
@@ -83,14 +87,17 @@ gulp.task('copy:css',function() {
 gulp.task('optimize:js',function() {
   return gulp.src(config.path.srcScript)
          .pipe(plugins.uglify())
+         .pipe(plugins.rev())
          .pipe(gulp.dest(config.path.distScript))
+         .pipe(plugins.rev.manifest())
+         .pipe(gulp.dest('.rev/js'))
          .pipe(plugins.size())
 })
 
 // optimize html
 gulp.task('optimize:html',function() {
   return gulp.src(config.path.srcHtml)
-        .pipe(plugins.htmlmin(config.optimize.htmloptions))
+        // .pipe(plugins.htmlmin(config.optimize.htmloptions))
         .pipe(gulp.dest(config.path.distHtml))
 })
 
@@ -100,4 +107,26 @@ gulp.task('optimize:images',function() {
          .pipe(plugins.imagemin(config.optimize.imageoptions))
          .pipe(gulp.dest(config.path.distImages))
          .pipe(plugins.size())
+})
+
+// del
+gulp.task('del',function(){
+   del.sync(['dist/**/*', '!dist/images/**/*']);
+})
+// 替换所有的link
+gulp.task('rev:collect',function(){
+  return gulp.src([config.collect.src,config.collect.html])
+        .pipe(plugins.revCollector({
+          replaceReved:true,
+          dirReplacement:{
+            'css':'/dist/css',
+            '/js/':'/dist/js'
+          }
+        }))
+        .pipe(gulp.dest('dist'))
+})
+
+// 默认生产任务
+gulp.task('build',function(){
+  runSequence('del',['copy:css','optimize:js','optimize:html','optimize:images'],'rev:collect')
 })

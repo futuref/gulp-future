@@ -1,4 +1,4 @@
-{
+ {
   "path":{
     "root":"./",
     "src": "src/",
@@ -16,7 +16,7 @@
     "dist": "dist/",
     "distScript":"dist/script/",
     "distCss":"dist/css/",
-    "distHtml":"dist/html/",
+    "distHtml":"dist/",
     "distImages":"dist/images/"
   },
   "autoprefixer":{
@@ -39,5 +39,10 @@
     "htmloptions":{
       "collapseWhitespace":true
     }
+  },
+
+  "collect":{
+    "src":".rev/**/*.json",
+    "html":"dist/*.html"
   }
 }
