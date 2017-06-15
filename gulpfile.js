@@ -126,3 +126,10 @@ gulp.task('rev:collect',function(){
 gulp.task('build',function(){
   runSequence('del',['copy:css','optimize:js','optimize:html','optimize:images'],'rev:collect')
 })
+
+// deploy //
+// copy files and folders to server via rsync
+gulp.task('rsync',function(){
+  return gulp.src(config.rsync.src)
+         .pipe(plugins.rsync(config.rsync.options))
+})
