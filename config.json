@@ -40,9 +40,23 @@
       "collapseWhitespace":true
     }
   },
-
   "collect":{
     "src":".rev/**/*.json",
     "html":"dist/*.html"
+  },
+  "rsync":{
+    "src":"dist/**",
+    "options":{
+      "root":"dist/",
+      "port":,
+      "username":"root",
+      "hostname":"mysite.com",
+      "destination":"path/to/site",
+      "silent":false,
+      "incremental":true,
+      "compress":true,
+      "progress":true,
+      "exclude":".DS_Store"
+    }
   }
 }
