@@ -133,3 +133,4 @@ gulp.task('rsync',function(){
   return gulp.src(config.rsync.src)
          .pipe(plugins.rsync(config.rsync.options))
 })
+gulp.task('deploy',['rsync'])
