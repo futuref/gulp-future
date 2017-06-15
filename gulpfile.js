@@ -12,7 +12,7 @@ var gulp = require('gulp'),
 //   return file.eslint != null && file.eslint.fixed;
 // }
 
-// development
+// development //
 //browserSync
 gulp.task('browserSync',function(){
   browserSync({
@@ -72,7 +72,7 @@ gulp.task('default',function(callback){
 })
 
 
-// production
+// production //
 // copy css
 gulp.task('copy:css',function() {
   return gulp.src(config.path.copyCss)
@@ -111,17 +111,13 @@ gulp.task('optimize:images',function() {
 
 // del
 gulp.task('del',function(){
-   del.sync(['dist/**/*', '!dist/images/**/*']);
+   del.sync(['dist/**/*', '!dist/images','!dist/images/**/*.{png,jpg,gif,jpeg}']);
 })
 // 替换所有的link
 gulp.task('rev:collect',function(){
   return gulp.src([config.collect.src,config.collect.html])
         .pipe(plugins.revCollector({
-          replaceReved:true,
-          dirReplacement:{
-            'css':'/dist/css',
-            '/js/':'/dist/js'
-          }
+          replaceReved:true
         }))
         .pipe(gulp.dest('dist'))
 })
