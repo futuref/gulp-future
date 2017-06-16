@@ -8,15 +8,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/futuref/gulp-future.git"
+    "url": "git+https://github.com/futuref/gulp-start.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/futuref/gulp-future/issues"
+    "url": "https://github.com/futuref/gulp-start/issues"
   },
-  "homepage": "https://github.com/futuref/gulp-future#readme",
+  "homepage": "https://github.com/futuref/gulp-start#readme",
   "devDependencies": {
     "autoprefixer": "^7.1.1",
     "browser-sync": "^2.18.12",
