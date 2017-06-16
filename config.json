@@ -1,0 +1,62 @@
+ {
+  "path":{
+    "root":"./",
+    "src": "src/",
+    "srcImages":"src/images/**/*.{png,jpg,gif,jpeg}",
+    "srcCss":"src/css/",
+    "copyCss":"src/css/*.css",
+    "srcHtml":"src/*.html",
+    "srcScript":"src/script/**/*.js",
+    "srclintScript":"src/script/*.js",
+    "srcOptimizeScript":"src/script/*.js",
+    "srcexcludeScript":"src/script/vendor/**/*.js",
+    "srcComplieScss":"src/scss/main.scss",
+    "srclintScss":"src/scss/*.scss",
+    "srcExcludeScss":"src/scss/vendor/**/*.scss",
+    "dist": "dist/",
+    "distScript":"dist/script/",
+    "distCss":"dist/css/",
+    "distHtml":"dist/",
+    "distImages":"dist/images/"
+  },
+  "autoprefixer":{
+    "browsers": [
+          "last 2 versions",
+          "safari 8",
+          "ie 9",
+          "opera 15",
+          "ios 6",
+          "android 4.4"
+        ],
+        "cascade": true
+  },
+  "optimize":{
+    "imageoptions":{
+      "optimizationLevel":3,
+      "progessive":true,
+      "interlaced":true
+    },
+    "htmloptions":{
+      "collapseWhitespace":true
+    }
+  },
+  "collect":{
+    "src":".rev/**/*.json",
+    "html":"dist/*.html"
+  },
+  "rsync":{
+    "src":"dist/**",
+    "options":{
+      "root":"dist/",
+      "port":,
+      "username":"root",
+      "hostname":"mysite.com",
+      "destination":"path/to/site",
+      "silent":false,
+      "incremental":true,
+      "compress":true,
+      "progress":true,
+      "exclude":".DS_Store"
+    }
+  }
+}
