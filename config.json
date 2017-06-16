@@ -51,10 +51,11 @@
       "port":,
       "username":"root",
       "hostname":"mysite.com",
-      "destination":"path/to/site",
+      "destination":"/path/to/site",
       "silent":false,
       "incremental":true,
       "compress":true,
+      "archive":true,
       "progress":true,
       "exclude":".DS_Store"
     }
