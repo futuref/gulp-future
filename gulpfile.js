@@ -1,16 +1,13 @@
-var gulp = require('gulp'),
-    config = require('./config.json'),
-    autoprefixer =require('autoprefixer'),
-    cssnano = require('cssnano'),
-    browserSync = require('browser-sync'),
-    runSequence = require('run-sequence'),
-    del         = require('del'),
+var gulp            = require('gulp'),
+    config          = require('./config.json'),
+    autoprefixer    =require('autoprefixer'),
+    cssnano         = require('cssnano'),
+    browserSync     = require('browser-sync'),
+    runSequence     = require('run-sequence'),
+    del             = require('del'),
     gulpLoadPlugins = require('gulp-load-plugins'),
-    plugins = gulpLoadPlugins();
+    plugins         = gulpLoadPlugins();
 
-// function isFixed(file) {
-//   return file.eslint != null && file.eslint.fixed;
-// }
 
 // development //
 //browserSync
@@ -35,7 +32,6 @@ gulp.task('js-lint',function() {
         .pipe(plugins.cached(config.path.srclintScript))
         .pipe(plugins.eslint({fix:true}))
         .pipe(plugins.eslint.format())
-        // .pipe(plugins.if(isFixed, gulp.dest(config.path.distScript)))
 })
 
 // eslint scss
@@ -97,7 +93,7 @@ gulp.task('optimize:js',function() {
 // optimize html
 gulp.task('optimize:html',function() {
   return gulp.src(config.path.srcHtml)
-        // .pipe(plugins.htmlmin(config.optimize.htmloptions))
+        .pipe(plugins.htmlmin(config.optimize.htmloptions))
         .pipe(gulp.dest(config.path.distHtml))
 })
 
@@ -133,4 +129,5 @@ gulp.task('rsync',function(){
   return gulp.src(config.rsync.src)
          .pipe(plugins.rsync(config.rsync.options))
 })
+
 gulp.task('deploy',['rsync'])
