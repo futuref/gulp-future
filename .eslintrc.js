@@ -12,8 +12,7 @@ module.exports = {
         'code': 100,
         'tabWidth': 2,
         'ignoreUrls': true,
-        "ignoreComments": true, // 忽略所有拖尾注释和行内注释,
-				ignorePattern: '^\s*(app)?.(controller|directive|service|factory|provider)'
+        "ignoreComments": true, // 忽略所有拖尾注释和行内注释
 			}
     ], // warn 100强制一行的最大长度
      'no-var': 0  //禁用var，用let和const代替var
