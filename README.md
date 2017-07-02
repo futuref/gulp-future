@@ -56,3 +56,4 @@ A gulp.js starter template with basic tasks for development,production and deplo
 
 在deploy任务中，就一个功能，就是将文件部署到服务器上。
 使用这个功能你需要根据你自己的服务器来配置，需要修改的地方就是在config.json这个文件中rsync配置信息。具体的可以参考 https://www.npmjs.com/package/gulp-rsync
+
